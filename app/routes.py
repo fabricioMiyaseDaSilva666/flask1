@@ -45,10 +45,10 @@ def listasIndividual():
     try:
         requisicao = requests.get(f'{link}/cadastro/.json')
         dicionario = requisicao.json()
-        idCadastro = "" #Colocar o id
+        idCadastro = "-O8wtLyW0C6rvk31RPkL" #Colocar o id
         for codigo in dicionario:
             chave = dicionario[codigo]['cpf']
-            if chave == '2435':
+            if chave == '12345':
                 idCadastro = codigo
                 return idCadastro
     except Exception as e:
@@ -58,7 +58,7 @@ def listasIndividual():
 def atualizar():
     try:
         dados = {"nome":"Amy Lee"}
-        requisicao = requests.patch(f'{link}/cadastro/-O8mjUyCEn87oSLEKDAH/.json', data=json.dumps(dados))
+        requisicao = requests.patch(f'{link}/cadastro/-O8wtLyW0C6rvk31RPkL/.json', data=json.dumps(dados))
         return "Atualizado com sucesso!"
     except Exception as e:
         return f'Aldo deu errado \n {e}'
@@ -67,6 +67,14 @@ def atualizar():
 def excluir():
     try:
         requisicao = requests.delete(f'{link}/cadastro/-O8mjUyCEn87oSLEKDAH/.json')
-        return "Excluido com sucesso!"
+        return render_template('excluir.html', titulo="Excluir")
+    except Exception as e:
+        return f'Algo deu errado\n {e}'
+
+@app.route('/consultaIndividual')
+def consultaIndividual():
+    try:
+
+
     except Exception as e:
         return f'Algo deu errado\n {e}'

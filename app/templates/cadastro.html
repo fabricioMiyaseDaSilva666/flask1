@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block conteudo %}
+  <h1>Área de cadastro</h1>
   <form action="/cadastrarUsuario" method="POST">
     <label>CPF: </label>
     <input type="text" name="cpf" id="cpf"/><br><br>
@@ -7,16 +8,17 @@
     <label>Nome: </label>
     <input type="text" name="nome" id="nome"/><br><br>
 
-    <label>Telefone: </label>
-    <input type="text" name="telefone" id="telefone"/><br><br>
+    <label>E-mail: </label>
+    <input type="text" name="email" id="email"/><br><br>
 
     <label>Endereço: </label>
     <input type="text" name="endereco" id="endereco"/><br><br>
 
-    <button>Cadastrar</button>
+    <button>Cadastrar</button><br><br>
   </form>
-  <a href="/listar">Consultar Tudo</a><br><br>
-  <a href="/listarIndividual">Consultar Individual</a><br><br>
-  <a href="/atualizar">Atualizar</a><br><br>
-  <a href="">Excluir</a><br><br>
+
+  <button type="button" class="btn btn-outline-success"><a href="/atualizar">Atualizar</a></button><br><br>
+  <button type="button" class="btn btn-outline-warning"><a href="/listar">Consultar Tudo</a></button><br><br>
+  <button type="button" class="btn btn-outline-primary"><a href="/listarIndividual">Consultar Individual</a></button><br><br>
+  <button type="button" class="btn btn-outline-danger"><a href="/excluir">Excluir</a></button>
 {% endblock %}
