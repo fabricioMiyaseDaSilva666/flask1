@@ -1,3 +1,33 @@
-.h1{text-aline: center;}
-.texto1{text-aline: center}
-.imagem1{width: 100px;}
+h1{text-align: center;}
+
+h2{text-align: center;}
+
+body{background-color: #FA9237;}
+
+#texto1{text-align: center;
+        margin-top: 3%;
+        margin-bottom: 5%;}
+
+#texto2{text-align: center;}
+
+#img1{width: 95%;
+      height: 20%;
+      margin-bottom: 3%;
+      margin-top: 3%;}
+
+#trailer{text-align: center;}
+
+#texto3{text-align: center;}
+
+#img2{width: 95%;
+      height: 20%
+      margin-top: 3%;}
+
+#texto4{text-align: center;}
+
+#img3{width: 95%;
+      height: 20%
+      margin-top: 3%;}
+
+#texto5{text-align: center;
+        margin-bottom: 3%}
