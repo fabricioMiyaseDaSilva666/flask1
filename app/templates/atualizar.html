@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 {% block conteudo %}
+    <form action="/cadastro" method="POST">
+        <label>CPF: </label>
+        <input type="text" name="cpf" id="cpf"/><br><br>
 
+        <button type="submit">Atualizar</button><br><br>
+    </form>
 
 {% endblock %}

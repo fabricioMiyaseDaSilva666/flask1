@@ -23,11 +23,9 @@ def cadastrarUsuario():
     try:
         cpf = request.form.get("cpf")
         nome = request.form.get("nome")
-        telefone = request.form.get("telefone")
+        email = request.form.get("email")
         endereco = request.form.get("endereco")
-        dados = {"cpf":cpf, "nome":nome, "telefone":telefone, "endereco":endereco}
-        cpf = {"cpf":cpf}
-        requisitarcpf = requests.post(f'{link}/cadastro/.json', data = json.dumps(cpf))
+        dados = {"cpf":cpf, "nome":nome, "email":email, "endereco":endereco}
         requisicao = requests.post(f'{link}/cadastro/.json', data = json.dumps(dados))
         return 'Cadastrado com sucesso!'
     except Exception as e:
@@ -47,7 +45,7 @@ def listasIndividual():
     try:
         requisicao = requests.get(f'{link}/cadastro/.json')
         dicionario = requisicao.json()
-        idCadastro = "-O8wtLyW0C6rvk31RPkL" #Colocar o id
+        idCadastro = "" #Colocar o id
         for codigo in dicionario:
             chave = dicionario[codigo]['cpf']
             if chave == '12345':
@@ -57,36 +55,25 @@ def listasIndividual():
         return f'Algo deu errado \n {e}'
 
 
-@app.route('/atualizar')
-def atualizar():
+
+
+@app.route('/excluir')
+def excluir():
+    return render_template('excluir.html')
+
+@app.route('/excluirConta', methods=["POST"])
+def excluirConta():
     try:
         cpf = request.form.get("cpf")
         requisicao = requests.get(f'{link}/cadastro/.json')
         dicionario = requisicao.json()
-        dados1 = {"cpf":cpf}
-        if requisicao == dados1:
-            return
+        for codigo in dicionario:
+            chave = dicionario[codigo]['cpf']
+            if chave == cpf:
+                idCadastro = codigo
+                idCadastro = requests.delete(f'{link}/cadastro/.json')
+                return render_template('excluirConta.html')
+        return "CPF não encontrado!"
     except Exception as e:
-        return f'Aldo deu errado \n +{e}'
-
-#   try: (esse é pra excluir)
-#       requisicao = requests.delete(f'{link}/cadastro/-O8mjUyCEn87oSLEKDAH/.json')
-#       return render_template('vercpf.html', titulo="Excluir")
-#   except Exception as e:
-#       return f'Algo deu errado\n {e}'
-
-@app.route('/vercpf')
-def vercpf():
-    return render_template('vercpf.html', titulo=vercpf)
-
-@app.route('/verificarCPF', methods=['POST'])
-def verificarCPF():
-    try:
-        cpf = requests.form.get("cpf")
-        dados1 = {"cpf":cpf}
-        verificar = requests.post(f'{link}/cadastro/.json', data = json.dumps(cpf))
-        if verificar == cpf:
-            return render_template('atualizar.html', titulo="Atualizar")
-    except Exception as e:
-        return f'Erro! CPF inválido\n {e}'
+        return f'Algo deu errado \n {e}'
 

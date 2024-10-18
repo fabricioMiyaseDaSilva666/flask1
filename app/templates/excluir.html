@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block conteudo %}
-    <form action="/verificarCPF" method="POST">
+    <form action="/excluirConta" method="POST">
         <label>CPF: </label>
         <input type="text" name="cpf" id="cpf"/><br><br>
 
-        <button>Atualizar</button><br><br>
+        <button type="submit">Excluir</button><br><br>
     </form>
 
 {% endblock %}
