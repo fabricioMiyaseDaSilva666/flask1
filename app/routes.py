@@ -100,17 +100,15 @@ def atualizar():
 @app.route('cadastraAtualizar', methods=['POST'])
 def cadastraAtualizar():
     try:
-        cpf = request.form.get("cpf")
-        requisicao = requests.get(f'{link}/cadastro/.json')
-        dicionario = requisicao.json()
+        nome = request.form.get("nome")
+        email = request.form.get("email")
+        endereco = request.form.get("endereco")
+
+        req = request.get(f'{link}/cadastro/.json')
+        dicionario = req.json()
         for codigo in dicionario:
-            chave = dicionario[codigo]['cpf']
-            if chave == cpf:
-                nome = requests.form.get("nomeNovo")
-                email = requests.form.get("emailNovo")
-                endereco = requests.form.get("enderecoNovo")
-                requisicao = requests. post(f'{link}/cadastro/.json', data=json.dumps(nome.email.endereco))
-                return "Seus dados foram atualizados"
-        return "CPF não encontrado!"
+            dados = {"nome":nome,"email":email,"endereco":endereco}
+            requisicao = request.patch(f'{link}/cadastro/{codigo}/.json', data=json.dumps(dados))
+        return "Atualizado com sucesso!"
     except Exception as e:
         return f'Algo deu errado \n {e}'
