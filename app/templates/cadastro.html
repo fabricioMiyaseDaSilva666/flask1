@@ -18,7 +18,19 @@
   </form>
 
   <button type="button" class="btn btn-outline-success"><a href="/atualizar">Atualizar</a></button><br><br>
-  <button type="button" class="btn btn-outline-warning"><a href="/listar">Consultar Tudo</a></button><br><br>
-  <button type="button" class="btn btn-outline-primary"><a href="/listarIndividual">Consultar Individual</a></button><br><br>
-  <button type="button" class="btn btn-outline-danger"><a href="/excluir">Excluir</a></button><br><br>
+
+  <form action="/individual" method="POST">
+    <label>CPF: </label>
+    <input type="text" name="cpf" id="cpfConta1"/><br><br>
+    <button type="submit" class="btn btn-outline-primary">Consultar Individual</button><br><br><br><br>
+  </form>
+
+  <form action="/excluirConta" method="POST">
+    <label>CPF: </label>
+    <input type="text" name="cpf" id="cpfConta"/><br><br>
+    <button type="submit" class="btn btn-outline-danger">Excluir</button><br><br>
+  </form>
+
+  <button type="button" class="btn btn-outline-warning"><a href="/listar">Consultar Tudo</a></button>
+
 {% endblock %}

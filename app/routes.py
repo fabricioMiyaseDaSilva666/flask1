@@ -57,12 +57,48 @@ def listasIndividual():
 
 
 
-@app.route('/excluir')
-def excluir():
-    return render_template('excluir.html')
-
 @app.route('/excluirConta', methods=["POST"])
 def excluirConta():
+    try:
+        cpf = request.form.get("cpf")
+        requisicao = requests.get(f'{link}/cadastro/.json')
+        dicionario = requisicao.json()
+        idCadastro = ""
+        for codigo in dicionario:
+            chave = dicionario[codigo]['cpf']
+            if chave == cpf:
+                idCadastro = requests.delete(f'{link}/cadastro/{codigo}/.json')
+                return "EXCLUIDO COM SUCESS"
+        return "CPF não encontrado!"
+    except Exception as e:
+        return f'Algo deu errado \n {e}'
+
+@app.route('/individual', methods=["POST"])
+def individual():
+    try:
+        cpf = request.form.get("cpf")
+        requisicao = requests.get(f'{link}/cadastro/.json')
+        dicionario = requisicao.json()
+        idCadastro = ""
+        for codigo in dicionario:
+            chave = dicionario[codigo]['cpf']
+            if chave == cpf:
+                cpf1 = cpf
+                nome = dicionario[codigo]['nome']
+                email = dicionario[codigo]['email']
+                endereco = dicionario[codigo]['endereco']
+                idCadastro = requests.get(f'{link}/cadastro/{codigo}/.json')
+                return f'CPF: {cpf1} \n\n   Nome: {nome} \n\n   Email: {email} \n\n   Endereço: {endereco}'
+        return "CPF não encontrado!"
+    except Exception as e:
+        return f'Algo deu errado \n {e}'
+
+@app.route('atualizar')
+def atualizar():
+    return render_template('atualizar.html', titulo="Atualizar")
+
+@app.route('cadastraAtualizar', methods=['POST'])
+def cadastraAtualizar():
     try:
         cpf = request.form.get("cpf")
         requisicao = requests.get(f'{link}/cadastro/.json')
@@ -70,10 +106,11 @@ def excluirConta():
         for codigo in dicionario:
             chave = dicionario[codigo]['cpf']
             if chave == cpf:
-                idCadastro = codigo
-                idCadastro = requests.delete(f'{link}/cadastro/.json')
-                return render_template('excluirConta.html')
+                nome = requests.form.get("nomeNovo")
+                email = requests.form.get("emailNovo")
+                endereco = requests.form.get("enderecoNovo")
+                requisicao = requests. post(f'{link}/cadastro/.json', data=json.dumps(nome.email.endereco))
+                return "Seus dados foram atualizados"
         return "CPF não encontrado!"
     except Exception as e:
         return f'Algo deu errado \n {e}'
-

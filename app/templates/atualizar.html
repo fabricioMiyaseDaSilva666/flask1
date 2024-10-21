@@ -1,10 +1,23 @@
 {% extends 'base.html' %}
 {% block conteudo %}
-    <form action="/cadastro" method="POST">
-        <label>CPF: </label>
+    <form action="/atualizar" method="POST">
+        <label>Informe seu CPF: </label>
         <input type="text" name="cpf" id="cpf"/><br><br>
-
-        <button type="submit">Atualizar</button><br><br>
+        <button type="submit" class="btn btn-outline-primary">Atualizar</button><br><br><br><br>
     </form>
+
+    <form action="/cadastrarUsuario" method="POST">
+        <label>Nome: </label>
+        <input type="text" name="nomeNovo" id="nomeNovo"/><br><br>
+
+        <label>E-mail: </label>
+        <input type="text" name="emailNovo" id="emailNovo"/><br><br>
+
+        <label>Endereço: </label>
+        <input type="text" name="enderecoNovo" id="enderecoNovo"/><br><br>
+
+        <button>Aualizar Cadastro</button><br><br>
+  </form>
+
 
 {% endblock %}
